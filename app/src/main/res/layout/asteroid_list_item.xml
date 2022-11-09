@@ -8,46 +8,51 @@
             name="asteroid"
             type="com.example.asteroidradar.Asteroid" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000000">
-        
+
         <TextView
             android:id="@+id/asteroid_codename"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/default_text_color"
+            android:layout_marginTop="-16dp"
+            android:layout_marginEnd="24dp"
             android:text="@{asteroid.codename}"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="2018 BF15"
-            />
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            tools:text="2018 BF15" />
 
         <TextView
             android:id="@+id/asteroid_closeApproachDate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="-16dp"
             android:text="@{asteroid.closeApproachDate}"
             android:textColor="@color/default_text_color"
-            tools:text="2022-5-5"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/asteroid_codename" />
+            tools:text="2022-5-5" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/asteroid_closeApproachDate"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/asteroid_codename"
-            app:srcCompat="@drawable/ic_status_normal" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_status_normal"
+            app:statusIcon="@{asteroid.isPotentiallyHazardous}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,7 +5,9 @@ import android.view.*
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.asteroidradar.R
 import com.example.asteroidradar.databinding.FragmentMainBinding
 
@@ -23,7 +25,14 @@ class MainFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.asteroidRecycler.adapter = AsteroidListAdapter(AsteroidListAdapter.OnClickListener {
-//            viewModel.displayAsteroidDetails(it)
+            viewModel.displayAsteroidDetails(it)
+        })
+
+        viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, Observer {
+            it?.let{
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetailFragment(it))
+                viewModel.displayAsteroidDetailsComplete()
+            }
         })
 
         with(binding){

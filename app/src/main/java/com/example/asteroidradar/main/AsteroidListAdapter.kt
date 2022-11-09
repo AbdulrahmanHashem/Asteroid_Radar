@@ -11,14 +11,21 @@ import com.example.asteroidradar.databinding.AsteroidListItemBinding
 class AsteroidListAdapter(private val onClickListener: OnClickListener): ListAdapter<Asteroid, AsteroidListAdapter.AsteroidViewHolder>(DiffCallback) {
 
     class AsteroidViewHolder(private val binding: AsteroidListItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(asteroid: Asteroid){
+        fun bind(asteroid: Asteroid) {
             binding.asteroid = asteroid
             binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): AsteroidViewHolder {
+                val binding = AsteroidListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return AsteroidViewHolder(binding)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AsteroidViewHolder {
-        return AsteroidViewHolder(AsteroidListItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return AsteroidViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: AsteroidViewHolder, position: Int) {
@@ -31,7 +38,7 @@ class AsteroidListAdapter(private val onClickListener: OnClickListener): ListAda
 
     companion object DiffCallback: DiffUtil.ItemCallback<Asteroid>() {
         override fun areItemsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
-            return oldItem === newItem
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
