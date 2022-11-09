@@ -42,6 +42,10 @@ class MainFragment : Fragment() {
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    when (menuItem.itemId){
+                        R.id.show_week_menu -> viewModel?.showWeekAsteroids()
+                        R.id.show_today_menu -> viewModel?.showTodayAsteroids()
+                    }
                     return true
                 }
             }, viewLifecycleOwner, Lifecycle.State.RESUMED)

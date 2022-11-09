@@ -15,6 +15,10 @@ class AsteroidsRepository(private val asteroidDatabase: AsteroidDatabase) {
         it.asDomainModel()
     }
 
+    val todayAsteroids: LiveData<List<Asteroid>> = Transformations.map(asteroidDatabase.asteroidDatabaseDao.getTodayAsteroids()) {
+        it.asDomainModel()
+    }
+
     suspend fun updateDatabase() {
         val asteroidsString = AsteroidRadarApi.retrofitService.getAsteroids(HashMap())
         val parsedString = parseAsteroidsJsonResult(JSONObject(asteroidsString))

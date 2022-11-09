@@ -23,7 +23,6 @@ interface AsteroidRadarApiService {
     suspend fun getAsteroids(
         @QueryMap queryMap: Map<String, String>
     ): String
-
 }
 
 object AsteroidRadarApi {

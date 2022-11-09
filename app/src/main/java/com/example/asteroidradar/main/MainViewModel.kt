@@ -1,6 +1,7 @@
 package com.example.asteroidradar.main
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.*
 import com.example.asteroidradar.Asteroid
 import com.example.asteroidradar.PictureOfDay
@@ -11,39 +12,43 @@ import com.example.asteroidradar.database.asDomainModel
 import com.example.asteroidradar.repository.AsteroidsRepository
 import kotlinx.coroutines.launch
 
+enum class Status(val value: Int){ Visible(View.VISIBLE), Invisible(View.INVISIBLE) }
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-//    private val _Asteroids = MutableLiveData<List<Asteroid>>()
-//    val Asteroids: LiveData<List<Asteroid>>
-//        get() = _Asteroids
-//
-//    private fun getAsteroids(filter: HashMap<String, String> = HashMap()) {
-//        viewModelScope.launch {
-//            try {
-//                _status.value = AsteroidRadarApiStatus.LOADING
-//                val listResult = AsteroidRadarApi.retrofitService.getAsteroids(filter)
-//                _Asteroids.value = listResult
-//                _status.value = AsteroidRadarApiStatus.DONE
-//            } catch (e: Exception) {
-//                _status.value = AsteroidRadarApiStatus.ERROR
-//                _Asteroids.value = ArrayList()
-//                println(e.message)
-//            }
-//            println(_Asteroids.value)
-//        }
-//    }
+    private val _status = MutableLiveData<Status>()
+    val status: LiveData<Status>
+        get() = _status
 
     private val database = AsteroidDatabase.getInstance(application)
     private val repository = AsteroidsRepository(database)
-
-    val asteroids = repository.Asteroids
 
     init {
         getPictureOfDay()
 
         viewModelScope.launch {
-            repository.updateDatabase()
+            try {
+                _status.value = Status.Visible
+                repository.updateDatabase()
+                _status.value = Status.Invisible
+            } catch (e: Exception) {
+                println(e.message)
+                _status.value = Status.Invisible
+            }
+        }
+    }
+
+    var asteroids = repository.Asteroids
+
+    fun showTodayAsteroids() {
+        viewModelScope.launch {
+            asteroids = repository.todayAsteroids
+        }
+    }
+
+    fun showWeekAsteroids() {
+        viewModelScope.launch {
+            asteroids = repository.Asteroids
         }
     }
 
@@ -54,12 +59,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun getPictureOfDay() {
         viewModelScope.launch {
             try {
+                _status.value = Status.Visible
                 val result = AsteroidImageOTDApi.retrofitService.getImageOfTheDay()
                 if (result.mediaType == "image"){
                     _pictureOfDay.value = result
                 }
+                _status.value = Status.Invisible
             } catch (e: Exception) {
                 println(e.message)
+                _status.value = Status.Invisible
             }
         }
     }
@@ -75,5 +83,4 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun displayAsteroidDetailsComplete() {
         _navigateToSelectedAsteroid.value = null
     }
-
 }
