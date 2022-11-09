@@ -6,6 +6,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -60,8 +61,8 @@ fun bindTextViewToAstronomicalUnit(textView: TextView, number: Double) {
     textView.text = String.format(context.getString(R.string.astronomical_unit_format), number)
 }
 
-//@BindingAdapter("POTDContentDescription")
-//fun bindPOTDContentDescription(imageView: ImageView, text: String) {
+//@BindingAdapter("setContentDescription")
+//fun bindSetContentDescription(imageView: ImageView, text: String) {
 //    try {
 //        val context = imageView.context
 //        if (text != ""){

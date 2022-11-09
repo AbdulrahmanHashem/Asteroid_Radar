@@ -35,6 +35,12 @@ class MainFragment : Fragment() {
             }
         })
 
+//        viewModel.asteroids.observe(this.viewLifecycleOwner, Observer {
+//            val adapter = binding.asteroidRecycler.adapter as AsteroidListAdapter
+//            adapter.submitList(it)
+//        })
+//        println(viewModel?.asteroids!!.value)
+
         with(binding){
             requireActivity().addMenuProvider(object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

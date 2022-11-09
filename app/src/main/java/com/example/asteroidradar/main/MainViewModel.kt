@@ -7,10 +7,12 @@ import com.example.asteroidradar.Asteroid
 import com.example.asteroidradar.PictureOfDay
 import com.example.asteroidradar.api.AsteroidImageOTDApi
 import com.example.asteroidradar.api.AsteroidRadarApi
+import com.example.asteroidradar.api.asDomainModel
 import com.example.asteroidradar.database.AsteroidDatabase
-import com.example.asteroidradar.database.asDomainModel
 import com.example.asteroidradar.repository.AsteroidsRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 enum class Status(val value: Int){ Visible(View.VISIBLE), Invisible(View.INVISIBLE) }
 
@@ -23,9 +25,36 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val database = AsteroidDatabase.getInstance(application)
     private val repository = AsteroidsRepository(database)
 
+    private val _asteroids = MutableLiveData<List<Asteroid>>()
+    val asteroids: LiveData<List<Asteroid>>
+        get() = _asteroids
+
+    fun showTodayAsteroids() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    _asteroids.postValue(repository.getToday())
+                } catch (e: Exception) {
+                    println(e.message)
+                }
+            }
+        }
+    }
+
+    fun showWeekAsteroids() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    _asteroids.postValue(repository.getAll())
+                } catch (e: Exception) {
+                    println(e.message)
+                }
+            }
+        }
+    }
     init {
         getPictureOfDay()
-
+        showWeekAsteroids()
         viewModelScope.launch {
             try {
                 _status.value = Status.Visible
@@ -35,20 +64,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 println(e.message)
                 _status.value = Status.Invisible
             }
-        }
-    }
-
-    var asteroids = repository.Asteroids
-
-    fun showTodayAsteroids() {
-        viewModelScope.launch {
-            asteroids = repository.todayAsteroids
-        }
-    }
-
-    fun showWeekAsteroids() {
-        viewModelScope.launch {
-            asteroids = repository.Asteroids
         }
     }
 
@@ -83,4 +98,25 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun displayAsteroidDetailsComplete() {
         _navigateToSelectedAsteroid.value = null
     }
+
+//    var asteroids = repository.asteroids
+//    fun showTodayAsteroids() {
+//        viewModelScope.launch {
+//            try {
+//                asteroids = repository.todayAsteroids
+//            } catch (e: Exception) {
+//                println(e.message)
+//            }
+//        }
+//    }
+//
+//    fun showWeekAsteroids() {
+//        viewModelScope.launch {
+//            try {
+//                asteroids = repository.asteroids
+//            } catch (e: Exception) {
+//                println(e.message)
+//            }
+//        }
+//    }
 }
