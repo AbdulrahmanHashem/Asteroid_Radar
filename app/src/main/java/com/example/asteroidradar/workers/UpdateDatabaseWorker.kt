@@ -15,7 +15,7 @@ class UpdateDatabaseWorker(appContext: Context, params: WorkerParameters): Corou
 
     override suspend fun doWork(): Result {
         val database = AsteroidDatabase.getInstance(applicationContext)
-        val repository = AsteroidsRepository(database)
+        val repository = AsteroidsRepository.getInstance(database)
         return try {
             repository.updateDatabase()
             Result.success()

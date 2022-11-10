@@ -3,6 +3,7 @@ package com.example.asteroidradar.main
 import android.app.Application
 import android.view.View
 import androidx.lifecycle.*
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.asteroidradar.datamodels.Asteroid
 import com.example.asteroidradar.datamodels.PictureOfDay
 import com.example.asteroidradar.api.AsteroidImageOTDApi
@@ -23,7 +24,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _status
 
     private val database = AsteroidDatabase.getInstance(application)
-    private val repository = AsteroidsRepository(database)
+    private val repository = AsteroidsRepository.getInstance(database)
 
     private val _asteroids = MutableLiveData<List<Asteroid>>()
     val asteroids: LiveData<List<Asteroid>>
@@ -67,7 +68,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         getPictureOfDay()
-        showAllAsteroids()
         viewModelScope.launch {
             try {
                 _status.value = Status.Visible
@@ -78,6 +78,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 _status.value = Status.Invisible
             }
         }
+        showAllAsteroids()
     }
 
     private val _pictureOfDay = MutableLiveData<PictureOfDay>()

@@ -16,11 +16,11 @@ class AsteroidRadarApplication: Application() {
         super.onCreate()
 
         applicationScope.launch {
-            setupRecurringWork()
+            setupUpdateDatabaseWork()
         }
     }
 
-    private fun setupRecurringWork() {
+    private fun setupUpdateDatabaseWork() {
         val constraint = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.UNMETERED)
             .setRequiresCharging(true)
