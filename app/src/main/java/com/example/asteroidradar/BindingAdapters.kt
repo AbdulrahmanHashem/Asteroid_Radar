@@ -24,16 +24,13 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
 }
 
 @BindingAdapter("setImage")
-fun bindImageOfTheDay(imageView: ImageView, image: String?){
-    image?.let {
-        val imgUri = it.toUri().buildUpon().scheme("https").build()
+fun bindImageOfTheDay(imageView: ImageView, POD: PictureOfDay?) {
+    POD?.let {
+        val imgUri = it.url.toUri().buildUpon().scheme("https").build()
         Glide.with(imageView.context)
             .load(imgUri)
-//            .apply(
-//                RequestOptions()
-//                .placeholder(R.drawable.placeholder_picture_of_day)
-//                .error(R.drawable.placeholder_picture_of_day))
             .into(imageView)
+        imageView.contentDescription = String.format(imageView.context.getString(R.string.nasa_picture_of_day_content_description_format), POD.title)
     }
 }
 

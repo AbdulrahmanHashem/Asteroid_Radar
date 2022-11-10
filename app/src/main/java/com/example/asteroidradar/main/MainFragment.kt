@@ -35,12 +35,6 @@ class MainFragment : Fragment() {
             }
         })
 
-//        viewModel.asteroids.observe(this.viewLifecycleOwner, Observer {
-//            val adapter = binding.asteroidRecycler.adapter as AsteroidListAdapter
-//            adapter.submitList(it)
-//        })
-//        println(viewModel?.asteroids!!.value)
-
         with(binding){
             requireActivity().addMenuProvider(object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -51,6 +45,7 @@ class MainFragment : Fragment() {
                     when (menuItem.itemId){
                         R.id.show_week_menu -> viewModel?.showWeekAsteroids()
                         R.id.show_today_menu -> viewModel?.showTodayAsteroids()
+                        R.id.show_saved_menu -> viewModel?.showAllAsteroids()
                     }
                     return true
                 }

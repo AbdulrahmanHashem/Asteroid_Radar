@@ -6,8 +6,6 @@ import androidx.lifecycle.*
 import com.example.asteroidradar.Asteroid
 import com.example.asteroidradar.PictureOfDay
 import com.example.asteroidradar.api.AsteroidImageOTDApi
-import com.example.asteroidradar.api.AsteroidRadarApi
-import com.example.asteroidradar.api.asDomainModel
 import com.example.asteroidradar.database.AsteroidDatabase
 import com.example.asteroidradar.repository.AsteroidsRepository
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +27,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val asteroids: LiveData<List<Asteroid>>
         get() = _asteroids
 
+    fun showAllAsteroids() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+                    _asteroids.postValue(repository.getAll())
+                } catch (e: Exception) {
+                    println(e.message)
+                }
+            }
+        }
+    }
+
     fun showTodayAsteroids() {
         viewModelScope.launch {
             withContext(Dispatchers.IO){
@@ -45,16 +55,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 try {
-                    _asteroids.postValue(repository.getAll())
+                    _asteroids.postValue(repository.getWeek())
                 } catch (e: Exception) {
                     println(e.message)
                 }
             }
         }
     }
+
     init {
         getPictureOfDay()
-        showWeekAsteroids()
+        showAllAsteroids()
         viewModelScope.launch {
             try {
                 _status.value = Status.Visible
@@ -98,25 +109,4 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun displayAsteroidDetailsComplete() {
         _navigateToSelectedAsteroid.value = null
     }
-
-//    var asteroids = repository.asteroids
-//    fun showTodayAsteroids() {
-//        viewModelScope.launch {
-//            try {
-//                asteroids = repository.todayAsteroids
-//            } catch (e: Exception) {
-//                println(e.message)
-//            }
-//        }
-//    }
-//
-//    fun showWeekAsteroids() {
-//        viewModelScope.launch {
-//            try {
-//                asteroids = repository.asteroids
-//            } catch (e: Exception) {
-//                println(e.message)
-//            }
-//        }
-//    }
 }
