@@ -1,7 +1,7 @@
 package com.example.asteroidradar.api
 
 import com.example.asteroidradar.Constants.BASE_URL
-import com.example.asteroidradar.PictureOfDay
+import com.example.asteroidradar.datamodels.PictureOfDay
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit

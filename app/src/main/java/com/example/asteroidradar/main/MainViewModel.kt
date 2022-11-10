@@ -3,8 +3,8 @@ package com.example.asteroidradar.main
 import android.app.Application
 import android.view.View
 import androidx.lifecycle.*
-import com.example.asteroidradar.Asteroid
-import com.example.asteroidradar.PictureOfDay
+import com.example.asteroidradar.datamodels.Asteroid
+import com.example.asteroidradar.datamodels.PictureOfDay
 import com.example.asteroidradar.api.AsteroidImageOTDApi
 import com.example.asteroidradar.database.AsteroidDatabase
 import com.example.asteroidradar.repository.AsteroidsRepository

@@ -1,8 +1,7 @@
 package com.example.asteroidradar.api
 
-import com.example.asteroidradar.Asteroid
+import com.example.asteroidradar.datamodels.Asteroid
 import com.example.asteroidradar.database.AsteroidDatabaseEntity
-import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)

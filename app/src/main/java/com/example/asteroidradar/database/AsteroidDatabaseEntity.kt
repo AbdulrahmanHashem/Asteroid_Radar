@@ -2,7 +2,6 @@ package com.example.asteroidradar.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.asteroidradar.Asteroid
 
 @Entity(tableName = "asteroids_table")
 data class AsteroidDatabaseEntity(

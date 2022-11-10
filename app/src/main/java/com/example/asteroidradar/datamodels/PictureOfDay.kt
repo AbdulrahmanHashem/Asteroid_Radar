@@ -1,4 +1,4 @@
-package com.example.asteroidradar
+package com.example.asteroidradar.datamodels
 
 import com.squareup.moshi.Json
 

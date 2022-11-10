@@ -6,7 +6,7 @@
     <data>
         <variable
             name="asteroid"
-            type="com.example.asteroidradar.Asteroid" />
+            type="com.example.asteroidradar.datamodels.Asteroid" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

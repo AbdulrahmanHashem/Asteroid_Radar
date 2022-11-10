@@ -1,6 +1,6 @@
 package com.example.asteroidradar.repository
 
-import com.example.asteroidradar.Asteroid
+import com.example.asteroidradar.datamodels.Asteroid
 import com.example.asteroidradar.api.*
 import com.example.asteroidradar.database.AsteroidDatabase
 import kotlinx.coroutines.Dispatchers
