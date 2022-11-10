@@ -73,12 +73,9 @@ dependencies {
     // Kotlin coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
-//    implementation 'org.jetbrains.kotlinx'
 
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
-//    // Image downloader
-//    implementation 'com.squareup.picasso:picasso:2.5.2'
     // Glide
     implementation "com.github.bumptech.glide:glide:4.14.2"
 

@@ -23,6 +23,7 @@ class AsteroidRadarApplication: Application() {
     private fun setupUpdateDatabaseWork() {
         val constraint = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.UNMETERED)
+            .setRequiresBatteryNotLow(true)
             .setRequiresCharging(true)
             .build()
 
