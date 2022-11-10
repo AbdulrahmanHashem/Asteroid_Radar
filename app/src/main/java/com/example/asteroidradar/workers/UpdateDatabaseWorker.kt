@@ -7,6 +7,7 @@ import com.example.asteroidradar.database.AsteroidDatabase
 import com.example.asteroidradar.repository.AsteroidsRepository
 import retrofit2.HttpException
 
+
 class UpdateDatabaseWorker(appContext: Context, params: WorkerParameters): CoroutineWorker(appContext, params){
     companion object {
         const val WORK_NAME = "UpdateDatabaseWorker"

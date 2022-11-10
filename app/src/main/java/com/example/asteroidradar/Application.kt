@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
+
 class AsteroidRadarApplication: Application() {
 
     private val applicationScope = CoroutineScope(Dispatchers.Default)

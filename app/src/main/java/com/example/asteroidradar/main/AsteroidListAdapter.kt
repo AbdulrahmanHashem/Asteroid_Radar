@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.asteroidradar.datamodels.Asteroid
 import com.example.asteroidradar.databinding.AsteroidListItemBinding
 
+
 class AsteroidListAdapter(private val onClickListener: OnClickListener): ListAdapter<Asteroid, AsteroidListAdapter.AsteroidViewHolder>(DiffCallback) {
 
     class AsteroidViewHolder(private val binding: AsteroidListItemBinding): RecyclerView.ViewHolder(binding.root) {

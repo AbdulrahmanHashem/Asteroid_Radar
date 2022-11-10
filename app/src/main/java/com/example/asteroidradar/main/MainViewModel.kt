@@ -12,7 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
 enum class Status(val value: Int){ Visible(View.VISIBLE), Invisible(View.INVISIBLE) }
+
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 

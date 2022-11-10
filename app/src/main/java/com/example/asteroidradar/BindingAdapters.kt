@@ -11,6 +11,7 @@ import com.example.asteroidradar.datamodels.Asteroid
 import com.example.asteroidradar.datamodels.PictureOfDay
 import com.example.asteroidradar.main.AsteroidListAdapter
 
+
 @BindingAdapter("loading_status")
 fun bindloading_status(progressBar: ProgressBar, visibility: Int) {
     progressBar.visibility = visibility
@@ -56,20 +57,6 @@ fun bindTextViewToAstronomicalUnit(textView: TextView, number: Double) {
     val context = textView.context
     textView.text = String.format(context.getString(R.string.astronomical_unit_format), number)
 }
-
-//@BindingAdapter("setContentDescription")
-//fun bindSetContentDescription(imageView: ImageView, text: String) {
-//    try {
-//        val context = imageView.context
-//        if (text != ""){
-//            imageView.contentDescription = String.format(context.getString(R.string.nasa_picture_of_day_content_description_format), text)
-//        } else {
-//            imageView.contentDescription = context.getString(R.string.this_is_nasa_s_picture_of_day_showing_nothing_yet)
-//        }
-//    } catch(e: Exception){
-//        println(e.message)
-//    }
-//}
 
 @BindingAdapter("kmUnitText")
 fun bindTextViewToKmUnit(textView: TextView, number: Double) {

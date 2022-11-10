@@ -1,9 +1,8 @@
 package com.example.asteroidradar.datamodels
 
 import android.os.Parcelable
-import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
-import org.json.JSONObject
+
 
 @Parcelize
 data class Asteroid(val id: Long,

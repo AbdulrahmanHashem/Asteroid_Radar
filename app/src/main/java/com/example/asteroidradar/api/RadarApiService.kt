@@ -10,8 +10,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
-//enum class AsteroidApiFilter(val value: String) { START_DATE("start_date"), END_DATE("end_date")}
-
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(ScalarsConverterFactory.create())

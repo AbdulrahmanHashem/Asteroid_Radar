@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.asteroidradar.R
 import com.example.asteroidradar.databinding.FragmentDetailBinding
 
+
 class DetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

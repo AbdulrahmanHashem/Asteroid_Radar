@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.asteroidradar.R
 import com.example.asteroidradar.databinding.FragmentMainBinding
 
+
 class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by lazy {
